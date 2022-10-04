@@ -26,8 +26,8 @@ function App() {
 	}, [setList]);
 
 	return (
-		<div className='App'>
-			<header className='AppHeader'>
+		<div>
+			<header>
 				<div className='formContainer'>
 					<div className='textContainer'>
 						<h1>Inicia tu reclamo</h1>
@@ -40,7 +40,7 @@ function App() {
 					</div>
 					<ClaimForm callback={getClaims} />
 				</div>
-				<ClaimTable list={list} />
+				{list.length >= 1 && <ClaimTable list={list} />}
 			</header>
 		</div>
 	);

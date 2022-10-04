@@ -15,7 +15,7 @@ body {
 	text-align: left;
 	display: flex;
 	flex-direction: column;
-	color: white;
+	color: white;;
 }
 
 .textContainer {
@@ -59,10 +59,12 @@ p {
 }
 
 @media (min-width: 768px) {
+
 	.formContainer {
 		flex-direction: row;
 		align-items: center;
-		height: 400px;
+		height: 600px;
+		width: 100%;
 	}
 
 	.textContainer {
