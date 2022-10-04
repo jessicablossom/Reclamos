@@ -27,10 +27,10 @@ function App() {
 
 	return (
 		<div className='App'>
-			<header className='App-header'>
-				<div className='form-container'>
-					<div className='text-container'>
-						<h1>Lorem ipsum dolor sit amet</h1>
+			<header className='AppHeader'>
+				<div className='formContainer'>
+					<div className='textContainer'>
+						<h1>Inicia tu reclamo</h1>
 						<p>
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
 							consectetur lectus in ante varius venenatis. Sed ligula tellus,

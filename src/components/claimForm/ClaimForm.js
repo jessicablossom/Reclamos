@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
+import storage from '../../firebase/firebaseConfig';
+import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
 
 import {
 	FormControl,
@@ -10,34 +12,62 @@ import {
 	Select,
 	TextareaAutosize,
 } from '@mui/material';
-import UploadFiles from '../UploadFiles';
+import UploadFiles from './UploadFiles';
 import '../../styles.css';
 import './claimform.css';
+import { async } from '@firebase/util';
 
 const ClaimForm = (props) => {
 	const [comunas, setComunas] = useState([]);
 	const [formValue, setformValue] = React.useState({
 		title: '',
 		description: '',
-		image: '',
+		imageUrl: '',
 		commune: '',
 	});
-	const [selectedFile, setSelectedFile] = React.useState(null);
+
+	const uploadImages = async (file) => {
+		const storageRef = ref(storage, `files/${file.name}`);
+		const uploadTask = uploadBytesResumable(storageRef, file);
+
+		const promise = new Promise((resolve, reject) => {
+			uploadTask.on(
+				'state_changed',
+				(snapshot) => {},
+				(error) => {
+					console.log(error);
+				},
+				() => {
+					// getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+					// 	console.log(downloadURL);
+					// });
+					return getDownloadURL(uploadTask.snapshot.ref).then((returnUrl) => {
+						console.log('La url es ', returnUrl);
+						resolve(returnUrl);
+					});
+				}
+			);
+		});
+
+		return promise;
+	};
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-
-		try {
-			const response = await Axios({
-				method: 'POST',
-				url: 'https://633a23d9e02b9b64c60c9d72.mockapi.io/claim',
-				data: formValue,
+		const file = event.target['input-upload'].files[0];
+		uploadImages(file).then((imageUrl) => {
+			console.log('Ya se subio la imagen, actualizando MockApi con ', imageUrl);
+			const data = { ...formValue, imageUrl };
+			Axios.post('https://633a23d9e02b9b64c60c9d72.mockapi.io/claim', data, {
 				headers: { 'Content-Type': 'application/json' },
-			});
-			props.callback();
-		} catch (error) {
-			console.log(error);
-		}
+			})
+				.then(function (response) {
+					props.callback();
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+		});
 	};
 
 	const handleChange = (event) => {
@@ -60,7 +90,7 @@ const ClaimForm = (props) => {
 	}, [setComunas]);
 
 	return (
-		<form className='form-wrapper' onSubmit={handleSubmit}>
+		<form id='claimform' className='form-wrapper' onSubmit={handleSubmit}>
 			<FormControl required fullWidth>
 				<InputLabel className='input-form' id='commune-select-label'>
 					Comuna

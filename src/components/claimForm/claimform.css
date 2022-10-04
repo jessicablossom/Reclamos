@@ -3,12 +3,14 @@
 	flex-direction: column;
 	justify-content: space-between;
 	height: 400px;
+	margin: 16px;
 }
 
 .input-form {
 	width: 100%;
 	height: 30px !important;
 	text-align: left;
+	background-color: white;
 }
 .text-area {
     height:60px !important;
@@ -20,15 +22,22 @@
     padding: 10px;
 
 }
-
 .primary {
-	width: 220px !important;
+	width: 100% !important;
 	height: 45px;
-    align-self: flex-end;
+	background-color: var(--secondary-light-color) !important;
 }
-
+.primary:hover {
+	background-color: var(--secondary-color) !important;
+}
 @media (min-width: 768px) {
 	.form-wrapper {
 		width: 500px;
+		margin: auto;
+		padding: 16px;
+	}
+	.primary {
+		width: 225px !important;
+		align-self: start;
 	}
 }

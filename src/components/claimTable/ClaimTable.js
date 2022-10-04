@@ -1,12 +1,7 @@
 import React from 'react';
 
 // mui components
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import { Card } from '@mui/material';
 
 //styles
 import './claimtable.css';
@@ -14,38 +9,28 @@ import '../../styles.css';
 
 const ClaimTable = (props) => {
 	return (
-		<div className='table-container'>
-			<TableContainer className='table'>
-				<Table aria-label='simple table'>
-					<TableHead>
-						<TableRow>
-							<TableCell> ID </TableCell>
-							<TableCell align='left'>Titulo</TableCell>
-							<TableCell align='left'>Descripcion</TableCell>
-							<TableCell align='left'>Imagenes</TableCell>
-							<TableCell align='left'>Comuna</TableCell>
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						{props.list.map((item) => (
-							<TableRow
-								key={item.id}
-								sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-							>
-								<TableCell component='th' scope='row'>
-									{item.id}
-								</TableCell>
-								<TableCell align='left'>{item.title}</TableCell>
-								<TableCell align='left'>{item.description}</TableCell>
-								<TableCell align='left'>
-									<a href='item.image'>{item.image}</a>
-								</TableCell>
-								<TableCell align='left'>Comuna - {item.commune}</TableCell>
-							</TableRow>
-						))}
-					</TableBody>
-				</Table>
-			</TableContainer>
+		<div className='tableContainer'>
+			<h2>Reclamos ingresados</h2>
+			<div className='gridTable'>
+				<p>ID</p>
+				<p>Comuna</p>
+				<p>Titulo</p>
+				<p>Descripcion</p>
+				<p>Imagen</p>
+			</div>
+			<div className='cardContainer'>
+				{props.list.map((item) => (
+					<Card className='cardItem' key={item.id} variant='outlined'>
+						<h6>Reclamo # {item.id}</h6>
+						<h6>Comuna - {item.commune}</h6>
+						<h5>{item.title}</h5>
+						<p>{item.description}</p>
+						<div>
+							<img src={item.imageUrl} />
+						</div>
+					</Card>
+				))}
+			</div>
 		</div>
 	);
 };

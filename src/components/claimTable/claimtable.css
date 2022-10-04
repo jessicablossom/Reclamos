@@ -1,3 +1,48 @@
-.table-container {
-    padding: 50px 24px;
+.tableContainer {
+    margin: 48px 0;
+    padding: 50px 16px;
+    text-align: left;
+}
+
+.gridTable {
+    display: none;
+}
+
+.cardItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 16px;
+    border-radius: 0 !important;
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+.cardItem img {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    
+    .gridTable {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        background-color: var(--primary-color);
+        color: white;
+        margin-bottom: 16px;
+        padding: 0 16px;
+    
+	}
+    .cardItem {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-content: flex-start;
+    padding: 24px;
+    border-radius: 0 !important;
+    margin-bottom: 16px;
+    text-align: left;
+    gap: 16px;
+}
+
+
 }

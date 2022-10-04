@@ -1,50 +1,89 @@
-.form-container {
+:root {
+	--primary-color: #8e44ad;
+	--primary-light-color: #9b59b6;
+	--secondary-light-color: #3498db;
+	--secondary-color: #2980b9;
+	--primary-text-color: #2f3640;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	color: var(--primary-text-color);
+}
+
+.formContainer {
 	text-align: left;
 	display: flex;
 	flex-direction: column;
-	margin: 50px 24px;
+	color: white;
 }
 
-.text-container {
+.textContainer {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	height: 100%;
 	max-width: 100%;
+	padding: 48px 24px;
+	margin-bottom: 24px;
+	background-color: var(--primary-light-color);
+
 }
+
 
 h1 {
 	font-size: 38px;
 	line-height: 38px;
 	margin-bottom: 16px;
 }
+h2 {
+	font-size: 24px;
+	line-height: 34px;
+	margin-bottom: 16px;
+}
 
+h5, h6 {
+	margin: 5px;}
+
+h6 {
+	font-size: 16px;
+}
+
+h5 {
+	font-size: 18px;
+}
 p {
 	font-size: 16px;
+	line-height: 22px;
 	margin-bottom: 16px;
 }
 
 @media (min-width: 768px) {
-
-	.form-container {
+	.formContainer {
 		flex-direction: row;
 		align-items: center;
-		justify-content: space-evenly;
-        height: 450px;
+		height: 400px;
 	}
-    
-	.text-container {
+
+	.textContainer {
 		max-width: 50%;
-        padding:16px
+		padding: 48px;
+		margin-top: 48px;
 	}
+
 	h1 {
 		font-size: 44px;
 		line-height: 44px;
 		margin-bottom: 24px;
 	}
-
-	p {
+	h6 {
+		font-size: 16px;
+	}
+	h5 {
 		font-size: 18px;
+	}
+	p {
+		font-size: 16px;
 		line-height: 24px;
 		margin-bottom: 24px;
 	}
