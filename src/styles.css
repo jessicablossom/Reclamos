@@ -11,22 +11,22 @@ body {
 	color: var(--primary-text-color);
 }
 
-.formContainer {
-	text-align: left;
-	display: flex;
-	flex-direction: column;
-	color: white;;
+.containerGrid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+grid-template-rows: auto;
+gap: 16px;
 }
 
+
 .textContainer {
+	grid-column: 1/-1;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	height: 100%;
-	max-width: 100%;
-	padding: 48px 24px;
-	margin-bottom: 24px;
 	background-color: var(--primary-light-color);
+	color: white;
+	padding: 48px 24px;
 
 }
 
@@ -59,17 +59,8 @@ p {
 
 @media (min-width: 768px) {
 
-	.formContainer {
-		flex-direction: row;
-		align-items: center;
-		height: 600px;
-		width: 100%;
-	}
-
 	.textContainer {
-		max-width: 50%;
-		padding: 48px;
-		margin-top: 48px;
+grid-column: 1/2;
 	}
 
 	h1 {

@@ -11,11 +11,11 @@ import {
 	MenuItem,
 	Select,
 	TextareaAutosize,
+	Stack,
 } from '@mui/material';
 import UploadFiles from './UploadFiles';
 import '../../styles.css';
 import './claimform.css';
-import { async } from '@firebase/util';
 
 const ClaimForm = (props) => {
 	const [comunas, setComunas] = useState([]);
@@ -38,11 +38,7 @@ const ClaimForm = (props) => {
 					console.log(error);
 				},
 				() => {
-					// getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-					// 	console.log(downloadURL);
-					// });
 					return getDownloadURL(uploadTask.snapshot.ref).then((returnUrl) => {
-						console.log('La url es ', returnUrl);
 						resolve(returnUrl);
 					});
 				}
@@ -56,7 +52,6 @@ const ClaimForm = (props) => {
 		event.preventDefault();
 		const file = event.target['input-upload'].files[0];
 		uploadImages(file).then((imageUrl) => {
-			console.log('Ya se subio la imagen, actualizando MockApi con ', imageUrl);
 			const data = { ...formValue, imageUrl };
 			Axios.post('https://633a23d9e02b9b64c60c9d72.mockapi.io/claim', data, {
 				headers: { 'Content-Type': 'application/json' },
@@ -90,9 +85,9 @@ const ClaimForm = (props) => {
 	}, [setComunas]);
 
 	return (
-		<form id='claimform' className='form-wrapper' onSubmit={handleSubmit}>
+		<form className='formContainer' id='claimform' onSubmit={handleSubmit}>
 			<FormControl required fullWidth>
-				<InputLabel className='input-form' id='commune-select-label'>
+				<InputLabel className='inputForm' id='commune-select-label'>
 					Comuna
 				</InputLabel>
 				<Select
@@ -102,6 +97,7 @@ const ClaimForm = (props) => {
 					name='commune'
 					value={formValue.commune}
 					onChange={handleChange}
+					color='primary'
 				>
 					{comunas.map((item) => (
 						<MenuItem key={'C' + item.id} value={item.id}>
@@ -116,20 +112,30 @@ const ClaimForm = (props) => {
 				id='outlined-basic'
 				label='Titulo'
 				variant='outlined'
-				className='input-form'
+				className='inputForm'
 				name='title'
 				value={formValue.title}
 				onChange={handleChange}
+				color='primary'
 			/>
-			<TextareaAutosize
-				required
-				placeholder='Descripcion'
-				className='text-area'
-				maxRows={5}
-				name='description'
-				value={formValue.description}
-				onChange={handleChange}
-			/>
+			<Stack
+				direction='column'
+				justifyContent='center'
+				alignItems='stretch'
+				spacing={2}
+				style={{ width: '100%' }}
+			>
+				<TextareaAutosize
+					required
+					placeholder='Descripcion'
+					className='textArea'
+					maxRows={5}
+					name='description'
+					value={formValue.description}
+					onChange={handleChange}
+					color='primary'
+				/>
+			</Stack>
 			<UploadFiles />
 			<Button type='submit' variant='contained' className='primary'>
 				Enviar

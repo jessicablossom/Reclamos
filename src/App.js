@@ -27,21 +27,20 @@ function App() {
 
 	return (
 		<div>
-			<header>
-				<div className='formContainer'>
-					<div className='textContainer'>
-						<h1>Inicia tu reclamo</h1>
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-							consectetur lectus in ante varius venenatis. Sed ligula tellus,
-							molestie at semper imperdiet, commodo sed ligula. Praesent egestas
-							interdum porta.
-						</p>
-					</div>
-					<ClaimForm callback={getClaims} />
+			<header></header>
+			<div className='containerGrid'>
+				<div className='textContainer'>
+					<h1>Inicia tu reclamo</h1>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
+						consectetur lectus in ante varius venenatis. Sed ligula tellus,
+						molestie at semper imperdiet, commodo sed ligula. Praesent egestas
+						interdum porta.
+					</p>
 				</div>
+				<ClaimForm callback={getClaims} />
 				{list.length >= 1 && <ClaimTable list={list} />}
-			</header>
+			</div>
 		</div>
 	);
 }
